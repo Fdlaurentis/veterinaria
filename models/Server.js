@@ -3,8 +3,8 @@ const cors = require("cors");
 
 const { db } = require("../database/db");
 const { userRouter } = require("../routes/user.router");
-const { Doctors } = require("./Doctors.model");
-const { Users } = require("./Users.model");
+const { Doctors } = require("./doctors.model");
+const { Users } = require("./users.model");
 const { Record } = require("./record.model");
 
 class Server {
@@ -43,13 +43,13 @@ class Server {
       .catch((error) => console.log(error));
 
     //relations
-         //Uno a Uno
-         Users.hasOne(Doctors);
-         Doctors.belongsTo(Users);
-    
-         //Uno a Muchos
-         Doctors.hasMany(Record, { foreignKey: "doctorId" });
-         Record.belongsTo(Doctors);
+    //Uno a Uno
+    Users.hasOne(Doctors);
+    Doctors.belongsTo(Users);
+
+    //Uno a Muchos
+    Doctors.hasMany(Record, { foreignKey: "doctorId" });
+    Record.belongsTo(Doctors);
 
 
     db.sync()

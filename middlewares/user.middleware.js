@@ -1,4 +1,4 @@
-const { Users } = require("../models/Users.model");
+const { Users } = require("../models/users.model");
 
 exports.validExistUserById = async (req, res, next) => {
   try {
