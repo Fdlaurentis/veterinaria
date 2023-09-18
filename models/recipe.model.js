@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { db } = require("../database/db");
 
-exports.Record = db.define("record", {
+exports.Recipe = db.define("recipe", {
   id: {
     primaryKey: true,
     autoIncrement: true,
