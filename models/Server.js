@@ -6,6 +6,10 @@ const { userRouter } = require("../routes/user.router");
 const { Doctors } = require("./doctors.model");
 const { Users } = require("./users.model");
 const { Record } = require("./record.model");
+const { Diary } = require("./diary.model");
+const { Client } = require("./client.model");
+const { Pet } = require("./pet.model");
+const { Recipe } = require("./recipe.model");
 
 class Server {
   constructor() {
@@ -51,7 +55,25 @@ class Server {
     Doctors.hasMany(Record, { foreignKey: "doctorId" });
     Record.belongsTo(Doctors);
 
+    Doctors.hasMany(Diary, { foreignKey: "doctorId" });
+    Diary.belongsTo(Doctors);
 
+    Doctors.hasMany(Diary, { foreignKey: "doctorId" });
+    Diary.belongsTo(Doctors);
+
+    Client.hasMany(Diary, { foreignKey: "clientId" });
+    Diary.belongsTo(Client);
+
+    Client.hasMany(Pet, { foreignKey: "clientId" });
+    Pet.belongsTo(Client);
+
+    Pet.hasMany(Record, { foreignKey: "petId" });
+    Record.belongsTo(Pet);
+
+    Recipe.hasMany(Record, { foreignKey: "recipeId" });
+    Record.belongsTo(Recipe);
+
+    //Sync hacia BBDD
     db.sync()
       .then(() => console.log("Database Synced"))
       .catch((error) => console.log(error));
